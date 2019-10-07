@@ -69,4 +69,8 @@ function module.emitall(timestamp)
 	return waketimes[1]
 end
 
+function module.nextwake()
+	return waketimes[1]
+end
+
 return module
