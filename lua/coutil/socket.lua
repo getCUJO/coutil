@@ -49,7 +49,7 @@ setclock(gettime)
 
 local function idle(deadline)
 	repeat
-		local timeout = max(0, deadline - gettime())
+		local timeout = max(0, deadline() - gettime())
 		if not emitsockevents(timeout) then
 			suspendprocess(timeout)
 		end

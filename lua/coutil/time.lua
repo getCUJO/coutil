@@ -12,6 +12,7 @@ local timevt = require "coutil.time.event"
 local canceltimer = timevt.cancel
 local setuptimer = timevt.create
 local emituntil = timevt.emitall
+local dynnextwake = timevt.nextwake
 
 local function waitdone(timestamp, event, ...)
 	if event ~= timestamp then
@@ -51,7 +52,7 @@ function module.run(idle, timeout)
 			return nextwake
 		end
 		if nextwake > now then
-			idle(nextwake)
+			idle(dynnextwake)
 		end
 	end
 end
