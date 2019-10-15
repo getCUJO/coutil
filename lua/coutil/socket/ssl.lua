@@ -36,6 +36,15 @@ function CoSSL:dohandshake()
 		if errmsg == "wantwrite" then
 			write = self
 		elseif errmsg ~= "wantread" then
+			if not errmsg then
+				local verif_result
+				verif_result, errmsg = socket:getpeerverification()
+				if verif_result then
+					errmsg = "unknown handshake error"
+				else
+					errmsg = "TLS certificate invalid: " .. errmsg
+				end
+			end
 			socket:close()
 			break
 		end
